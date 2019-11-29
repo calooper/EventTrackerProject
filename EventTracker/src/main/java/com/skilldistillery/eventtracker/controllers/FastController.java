@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -76,16 +77,17 @@ public class FastController {
 		}
 
 	}
-	
+
 	@PutMapping(path = "fasts/{id}")
-	public Fast updateFast(@PathVariable ("id")Integer fid, @RequestBody Fast fast, HttpServletRequest req, HttpServletResponse resp) {
-		
+	public Fast updateFast(@PathVariable("id") Integer fid, @RequestBody Fast fast, HttpServletRequest req,
+			HttpServletResponse resp) {
+
 		System.out.println("********************" + fid);
 		Fast fastExisting = findFastByID(fid, resp);
-		
+
 		System.out.println("++++++++++++++++++++++++" + fid);
 		try {
-			fast = fRepo.updateFast( fid, fast);
+			fast = fRepo.updateFast(fid, fast);
 			resp.setStatus(200);
 //			resp.addHeader("Location", "http://localhost:8089/api/fasts/" + fast.getId());
 			StringBuffer url = req.getRequestURL();
@@ -98,17 +100,19 @@ public class FastController {
 
 		return fast;
 	}
-	
-	@PutMapping(path = "fasts/search/{keyword}")
-	public List<Fast> fastByKeyword(@PathVariable ("id")Integer fid, @RequestBody Fast fast, HttpServletRequest req, HttpServletResponse resp) {
-		List<Fast>fasts = null;
+
+	@GetMapping(path = "fasts/search/{keyword}")
+	public List<Fast> fastByKeyword(@PathVariable("keyword") Double keyword, HttpServletRequest req,
+			HttpServletResponse resp) {
+		List<Fast> fasts = null;
+
 		try {
-			fast = fRepo.updateFast(fid, fast);
+			fasts = fRepo.fastsByKeyword(keyword);
 			resp.setStatus(201);
-			resp.addHeader("Location", "http://localhost:8082/api/posts/" + fast.getId());
-			StringBuffer url = req.getRequestURL();
-			url.append("/").append(fast.getId());
-			resp.addHeader("Location", url.toString());
+//			resp.addHeader("Location", "http://localhost:8089/api/fasts/search/" + keyword);
+//			StringBuffer url = req.getRequestURL();
+//			url.append("/").append(keyword);
+//			resp.addHeader("Location", url.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			resp.setStatus(400);

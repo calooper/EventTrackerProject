@@ -76,5 +76,16 @@ public class FastServiceImpl implements FastService {
 		}
 		return existing;
 	}
+	
+	@Override
+	public List<Fast> fastsByKeyword(Double keyword) {
+		
+		List<Fast> fasts = fRepo.findByLengthEquals(keyword);
+;
+	
+		return fasts;
+	}
+	
+
 
 }

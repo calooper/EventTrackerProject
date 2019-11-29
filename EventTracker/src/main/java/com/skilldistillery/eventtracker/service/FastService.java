@@ -16,4 +16,6 @@ public interface  FastService {
 	boolean deleteFast(int id);
 	
 	Fast updateFast(int id, Fast fast);
+	
+	public List<Fast> fastsByKeyword(Double keyword);
 }

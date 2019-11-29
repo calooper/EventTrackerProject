@@ -8,6 +8,6 @@ import com.skilldistillery.eventtracker.entities.Fast;
 
 public interface FastRepository extends JpaRepository<Fast, Integer> {
 
-	 List<Fast> findByDateLikeOrLengthLike(String keyword, String keyword2);
+	 List<Fast> findByLengthEquals(Double keyword);
 
 }
