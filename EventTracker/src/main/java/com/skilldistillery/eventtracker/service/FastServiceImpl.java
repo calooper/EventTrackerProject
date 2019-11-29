@@ -1,5 +1,6 @@
 package com.skilldistillery.eventtracker.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,7 +82,16 @@ public class FastServiceImpl implements FastService {
 	public List<Fast> fastsByKeyword(Double keyword) {
 		
 		List<Fast> fasts = fRepo.findByLengthEquals(keyword);
-;
+
+	
+		return fasts;
+	}
+	
+	@Override
+	public List<Fast> fastsByDate(LocalDate dateSearch) {
+		
+		List<Fast> fasts = fRepo.findAllByDate(dateSearch);
+
 	
 		return fasts;
 	}

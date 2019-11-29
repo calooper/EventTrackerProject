@@ -1,5 +1,7 @@
 package com.skilldistillery.eventtracker.controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,6 +110,33 @@ public class FastController {
 
 		try {
 			fasts = fRepo.fastsByKeyword(keyword);
+			resp.setStatus(201);
+//			resp.addHeader("Location", "http://localhost:8089/api/fasts/search/" + keyword);
+//			StringBuffer url = req.getRequestURL();
+//			url.append("/").append(keyword);
+//			resp.addHeader("Location", url.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			resp.setStatus(400);
+			e.printStackTrace();
+		}
+
+		return fasts;
+	}
+	
+	@GetMapping(path = "fasts/searchdate/{date}")
+	public List<Fast> fastByKeyword(@PathVariable("date") String date, HttpServletRequest req,
+			HttpServletResponse resp) {
+		List<Fast> fasts = null;
+		
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+//		LocalDate localDate = LocalDate.parse(date, formatter);
+		
+		 LocalDate localDate = LocalDate.parse(date);
+
+		
+		try {
+			fasts = fRepo.fastsByDate(localDate);
 			resp.setStatus(201);
 //			resp.addHeader("Location", "http://localhost:8089/api/fasts/search/" + keyword);
 //			StringBuffer url = req.getRequestURL();
