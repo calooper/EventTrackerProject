@@ -111,10 +111,10 @@ public class FastController {
 		try {
 			fasts = fRepo.fastsByKeyword(keyword);
 			resp.setStatus(201);
-//			resp.addHeader("Location", "http://localhost:8089/api/fasts/search/" + keyword);
-//			StringBuffer url = req.getRequestURL();
-//			url.append("/").append(keyword);
-//			resp.addHeader("Location", url.toString());
+			resp.addHeader("Location", "http://localhost:8089/api/fasts/search/" + keyword);
+			StringBuffer url = req.getRequestURL();
+			url.append("/").append(keyword);
+			resp.addHeader("Location", url.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			resp.setStatus(400);
@@ -129,8 +129,6 @@ public class FastController {
 			HttpServletResponse resp) {
 		List<Fast> fasts = null;
 		
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-//		LocalDate localDate = LocalDate.parse(date, formatter);
 		
 		 LocalDate localDate = LocalDate.parse(date);
 
@@ -138,10 +136,10 @@ public class FastController {
 		try {
 			fasts = fRepo.fastsByDate(localDate);
 			resp.setStatus(201);
-//			resp.addHeader("Location", "http://localhost:8089/api/fasts/search/" + keyword);
-//			StringBuffer url = req.getRequestURL();
-//			url.append("/").append(keyword);
-//			resp.addHeader("Location", url.toString());
+			resp.addHeader("Location", "http://localhost:8089/api/fasts/search/" + date);
+			StringBuffer url = req.getRequestURL();
+			url.append("/").append(date);
+			resp.addHeader("Location", url.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			resp.setStatus(400);
