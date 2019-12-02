@@ -1,5 +1,6 @@
 package com.skilldistillery.eventtracker.repositories;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
@@ -21,14 +22,16 @@ public class FastRepositoryTest {
 	private FastRepository repo;
 
 	@Test
-	void test_CommmentReop() {
-		Optional<Fast> woOpt = repo.findById(1);
-		assertTrue(woOpt.isPresent());
+	void test_Fast_Reop() {
+		Optional<Fast> fOpt = repo.findById(1);
+		assertTrue(fOpt.isPresent());
 
-		if (woOpt.isPresent()) {
-			Fast wo = woOpt.get();
-//			assertEquals("skydiving");
+		if (fOpt.isPresent()) {
+			Fast f = fOpt.get();
+			assertEquals(14.0, f.getLength(), .1);
+			assertEquals("2019-11-27", f.getDate().toString());
 		}
+		
 	}
 	
 	
