@@ -85,6 +85,7 @@ function displayFast(fast) {
 		let tableDataDelete = document.createElement('td');
 		let button = document.createElement('td');
 		let edit = document.createElement('td');
+		let edit2 = document.createElement('td');
 		
 		
 		
@@ -100,6 +101,52 @@ function displayFast(fast) {
 			 <button id="edit" class="btn btn-info" value="fastId" data-toggle="collapse" aria-controls="collapseExample" data-target="#collapseExample" >Edit</button>
 					
 			 `;
+		 
+		 
+		 edit2 = innerHTML = `
+		 
+		 <div class="collapse" id="collapseExample">
+		<div class="mt-3">
+
+			<form name="updateForm">
+				<div style="float: left;">
+
+					<input type="date" class="form-control" name="data"
+						value="date" placeholder="date"
+						required> 
+						
+						<input type="time" class="form-control"
+						name="fastStart" value="fastStart" placeholder="Start Fast Time"> 
+						
+						<input type="time" class="form-control"
+						name="fastEnd" value="fastEnd"
+						placeholder="End Fast Time"> 
+						
+						<input type="number"
+						class="form-control" name="calories" value="calories"
+						placeholder="Calories"> 
+						
+						<input type="number" class="form-control"
+						name="id" value="id" placeholder="ID" 
+						required> 
+						
+						
+				</div>
+				<div></div>
+				<div class="UpdateButton">
+					<br>
+					<!-- nbsp for space between buttons -->
+					&nbsp
+					<button type="submit" name="update" value="e"class="btn btn-warning btn-block"
+						>Update</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+		 `
+			 
+			 
 		
 		
 		button.addEventListener('click', function(event) {
@@ -110,6 +157,8 @@ function displayFast(fast) {
 			
 
 		});
+		 
+
 		
 
 		let tableDataID = document.createElement('td');
@@ -137,14 +186,10 @@ function displayFast(fast) {
 		tableRow.appendChild(tableDataDelete);
 		tableRow.appendChild(button);
 		tableRow.appendChild(edit);
-
 		
-	
 	})
 	
-
 }
-
 
 
 function deleteFunction(e) {
@@ -226,13 +271,13 @@ function deleteRow(fastId) {
 }
 
 
-updateForm.update.addEventListener('click', function(e) {
-
-console.log("in the update");
-
-event.preventDefault();
-var fastIdDelete = e.id;
-editFunction(e);
-
-
-});
+//updateForm.update.addEventListener('click', function(e) {
+//
+//console.log("in the update");
+//
+//event.preventDefault();
+//var fastIdDelete = e.id;
+//editFunction(e);
+//
+//
+//});

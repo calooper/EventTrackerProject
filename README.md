@@ -20,6 +20,7 @@ All Technologies Used:
 * Apache Tomcat
 * MAMP
 * STS
+* JavaScript
 
 
 REST Endpoints:
@@ -49,9 +50,16 @@ I used Time and LocalDate for a couple variables for my Fast entity. This
 created a couple issues with MySQl workbench and also the parsing from the
 front-end to the controller. I was able to resolve this MySQL issue by inputing
 the time numerical-only. The other LocalDate issue in the controller was resolved
-by parsing a String date into a LocalDate. 
+by parsing a String date into a LocalDate.
+
+Working with the JavaScript, the edit feature was a a bit of a challenge. The
+biggest trouble came from trying to debug the value of variables being passed
+around.
 
 ### Stretch Goals
 I did not use any custom queries for this project, but as we
 move forward to next week's homework and keep building on this project, there
 might be a need to implement any custom queries.
+
+I would like to make this a fully responsive app that I could use to track
+my intermittent fasting from my phone.
