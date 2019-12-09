@@ -78,9 +78,7 @@ function displayFast(fast) {
 
 	let h2 = document.querySelector('h3');
 	let totalCalories = 0;
-
-	
-	
+	let length = fast.length;
 
 	fast.forEach(function(e) {
 
@@ -125,6 +123,9 @@ function displayFast(fast) {
 		let tableDataEnd = document.createElement('td');
 		let tableDataCalories = document.createElement('td');
 		let tableDataLength = document.createElement('td');
+		
+		console.log("e length " + fast.length);
+		console.log("total calories" + totalCalories);
 	
 
 		tableDataID.textContent = e.id;
@@ -132,7 +133,7 @@ function displayFast(fast) {
 		tableDataStart.textContent = e.startFast;
 		tableDataEnd.textContent = e.endFast;
 		tableDataCalories.textContent = e.calories;
-		h2.textContent = Math.round(totalCalories /  e.length);
+		h2.textContent = Math.round(totalCalories /  length);
 
 	
 	
@@ -147,9 +148,13 @@ function displayFast(fast) {
 		tableRow.appendChild(button);
 		tableRow.appendChild(edit);
 //		tableRow.appendChild(h2);
+		
+		
 	
 		
 	})
+	
+
 	
 
 }
@@ -172,9 +177,7 @@ function deleteFunction(e) {
 
 function editFunction() {
 	
-// console.log("in edit function " + e.id)
-// var fastId = e.id;
-	
+
 	var form2 = document.updateForm;
 	var newFastObject = {
 		date : form2.date.value,
@@ -212,6 +215,7 @@ function editFunction() {
 	console.log(newFastJsonString);
 
 	xhr.send(newFastJsonString);
+	location.reload();
 
 }
 
