@@ -42,6 +42,7 @@ function addNewFast() {
 	console.log(newFastJsonString);
 
 	xhr.send(newFastJsonString);
+	location.reload();
 
 }
 
@@ -66,30 +67,50 @@ function getFastAll() {
 	};
 
 	xhr.send(null);
+	
 
 }
 
 function displayFast(fast) {
 
 	console.log("in dsplay length");
+	
+
 
 	fast.forEach(function(e) {
 
 		let tableBody = document.querySelector('tbody');
 
 		let tableRow = document.createElement('tr');
+		let tableDataDelete = document.createElement('td');
+		let button = document.createElement('td');
+		let edit = document.createElement('td');
 		
 		
-		tableRow.addEventListener('click', function(event) {
+		
+		 button.innerHTML = `
+				
+		 <button id="delete" name="deleteIt" class="btn btn-danger
+		 value="fastId"
+		 value="fastId">Delete</button>
+		
+		 `;
+		 
+		 edit.innerHTML = `
+			 <button id="edit" class="btn btn-info" value="fastId" data-toggle="collapse" aria-controls="collapseExample" data-target="#collapseExample" >Edit</button>
+					
+			 `;
+		
+		
+		button.addEventListener('click', function(event) {
 			
 			event.preventDefault();
 			var fastIdDelete = e.id;
-			editFunction(e);
+			deleteFunction(e);
 			
 
 		});
-
-//		let deleteButton = document.getElementById('delete');
+		
 
 		let tableDataID = document.createElement('td');
 		let tableDataDate = document.createElement('td');
@@ -97,8 +118,7 @@ function displayFast(fast) {
 		let tableDataEnd = document.createElement('td');
 		let tableDataCalories = document.createElement('td');
 		let tableDataLength = document.createElement('td');
-		let tableDataDelete = document.createElement('td');
-		let tableDataEdit = document.createElement('td');
+	
 
 		tableDataID.textContent = e.id;
 		tableDataDate.textContent = e.date;
@@ -107,22 +127,6 @@ function displayFast(fast) {
 		tableDataCalories.textContent = e.calories;
 
 	
-		//
-		// tableDataDelete.innerHTML = `
-		//		
-		// <button id="delete" name="deleteIt" class="btn btn-danger
-		// value="fastId"
-		// value="fastId">Delete</button>
-		//
-		// `;
-		//		
-		//
-		//			
-		//		
-		// tableDataEdit.innerHTML = `
-		// <button id="edit" class="btn btn-info" value="fastId">Edit</button>
-		//		
-		// `;
 
 		tableBody.appendChild(tableRow);
 		tableRow.appendChild(tableDataID);
@@ -131,7 +135,8 @@ function displayFast(fast) {
 		tableRow.appendChild(tableDataEnd);
 		tableRow.appendChild(tableDataCalories);
 		tableRow.appendChild(tableDataDelete);
-		tableRow.appendChild(tableDataEdit);
+		tableRow.appendChild(button);
+		tableRow.appendChild(edit);
 
 		
 	
@@ -142,31 +147,57 @@ function displayFast(fast) {
 
 
 
-function myFunction() {
-	  var fastId = prompt("Please enter the fast ID");
+function deleteFunction(e) {
+	  confirm("Are you sure you want to delete this fast?");
+	  var fastId = e.id;
 	  
 	  if (fastId != null ) {
-		  deleteRow(fastId)
+		
 	  }
+		
 	  else window.prompt("Please enter a valid ID")
+	  
+	    deleteRow(fastId)
 	  
 	}
 
-function editFunction(e) {
+
+function editFunction(id) {
 	
-//	  var fastId = prompt("Fast Number: " + e.id);
-	  var Data = prompt("This\nis\nmultiline");
-	  
-	  
-	  
-	  
-	  
-//	  if (fastId != null ) {
-//		  deleteRow(fastId)
-//	  }
-//	  else window.prompt("Please enter a valid ID")
-	  
-	}
+//	console.log("in edit function " + e)
+//	var fastId = e.id;
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8089/api/fasts/' + id, true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.onreadystatechange = function() {
+
+		if (xhr.readyState === 4) {
+			if (xhr.status == 200 || xhr.status == 201) {
+				var fastObject = JSON.parse(xhr.responseText);
+				console.log(fastObject);
+				displayFast(fastObject);
+			} else {
+				console.log("POST request failed.");
+				console.error(xhr.status + ': ' + xhr.responseText);
+			}
+		}
+	};
+
+	var form2 = document.addFastForm;
+	var newFastObject = {
+		date : null,
+		startFast : 12450000,
+		endFast : 000000,
+		calories : 7000
+	};
+
+	var newFastJsonString = JSON.stringify(newFastObject);
+	console.log(newFastJsonString);
+
+	xhr.send(newFastJsonString);
+	location.reload();
+
+}
 
 
 
@@ -191,4 +222,17 @@ function deleteRow(fastId) {
 
 
 	xhr.send(null);
+	location.reload();
 }
+
+
+updateForm.update.addEventListener('click', function(e) {
+
+console.log("in the update");
+
+event.preventDefault();
+var fastIdDelete = e.id;
+editFunction(e);
+
+
+});
