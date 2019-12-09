@@ -35,7 +35,7 @@ function addNewFast() {
 		date : form.date.value,
 		startFast : 12450000,
 		endFast : 000000,
-		calories : 3000
+		calories : 4000
 	};
 
 	var newFastJsonString = JSON.stringify(newFastObject);
@@ -73,7 +73,7 @@ function getFastAll() {
 
 function displayFast(fast) {
 
-	console.log("in dsplay length");
+	console.log("in display fast");
 	
 
 
@@ -85,7 +85,7 @@ function displayFast(fast) {
 		let tableDataDelete = document.createElement('td');
 		let button = document.createElement('td');
 		let edit = document.createElement('td');
-		let edit2 = document.createElement('td');
+// let edit2 = document.createElement('td');
 		
 		
 		
@@ -98,56 +98,10 @@ function displayFast(fast) {
 		 `;
 		 
 		 edit.innerHTML = `
-			 <button id="edit" class="btn btn-info" value="fastId" data-toggle="collapse" aria-controls="collapseExample" data-target="#collapseExample" >Edit</button>
+			 <button id="edit" class="btn btn-info" value="id" data-toggle="collapse" aria-controls="collapseExample" data-target="#collapseExample" >Edit</button>
 					
 			 `;
 		 
-		 
-		 edit2 = innerHTML = `
-		 
-		 <div class="collapse" id="collapseExample">
-		<div class="mt-3">
-
-			<form name="updateForm">
-				<div style="float: left;">
-
-					<input type="date" class="form-control" name="data"
-						value="date" placeholder="date"
-						required> 
-						
-						<input type="time" class="form-control"
-						name="fastStart" value="fastStart" placeholder="Start Fast Time"> 
-						
-						<input type="time" class="form-control"
-						name="fastEnd" value="fastEnd"
-						placeholder="End Fast Time"> 
-						
-						<input type="number"
-						class="form-control" name="calories" value="calories"
-						placeholder="Calories"> 
-						
-						<input type="number" class="form-control"
-						name="id" value="id" placeholder="ID" 
-						required> 
-						
-						
-				</div>
-				<div></div>
-				<div class="UpdateButton">
-					<br>
-					<!-- nbsp for space between buttons -->
-					&nbsp
-					<button type="submit" name="update" value="e"class="btn btn-warning btn-block"
-						>Update</button>
-				</div>
-			</form>
-		</div>
-	</div>
-
-		 `
-			 
-			 
-		
 		
 		button.addEventListener('click', function(event) {
 			
@@ -158,9 +112,18 @@ function displayFast(fast) {
 
 		});
 		 
+//			
+// edit2.updateForm.FormaddEventListener('click', function(event) {
+//				
+// event.preventDefault();
+// var fastIdDelete = e.id;
+// editFunction(e);
+//				
+//
+// });
+		 
 
-		
-
+	
 		let tableDataID = document.createElement('td');
 		let tableDataDate = document.createElement('td');
 		let tableDataStart = document.createElement('td');
@@ -207,12 +170,27 @@ function deleteFunction(e) {
 	}
 
 
-function editFunction(id) {
+function editFunction() {
 	
-//	console.log("in edit function " + e)
-//	var fastId = e.id;
+// console.log("in edit function " + e.id)
+// var fastId = e.id;
+	
+	var form2 = document.updateForm;
+	var newFastObject = {
+		date : form2.date.value,
+		startFast : 12450000,
+		endFast : 000000,
+		calories : form2.calories.value,
+		id : form2.id.value
+	};
+	
+
+	let fastId = newFastObject.id
+	
+	
+	
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8089/api/fasts/' + id, true);
+	xhr.open('PUT', 'http://localhost:8089/api/fasts/' + fastId, true);
 	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.onreadystatechange = function() {
 
@@ -228,19 +206,12 @@ function editFunction(id) {
 		}
 	};
 
-	var form2 = document.addFastForm;
-	var newFastObject = {
-		date : null,
-		startFast : 12450000,
-		endFast : 000000,
-		calories : 7000
-	};
+
 
 	var newFastJsonString = JSON.stringify(newFastObject);
 	console.log(newFastJsonString);
 
 	xhr.send(newFastJsonString);
-	location.reload();
 
 }
 
@@ -271,13 +242,13 @@ function deleteRow(fastId) {
 }
 
 
-//updateForm.update.addEventListener('click', function(e) {
-//
-//console.log("in the update");
-//
-//event.preventDefault();
-//var fastIdDelete = e.id;
-//editFunction(e);
-//
-//
-//});
+updateForm.updateFast.addEventListener('click', function(e) {
+
+console.log("in the update" + e.id);
+
+event.preventDefault();
+
+editFunction();
+
+
+});
