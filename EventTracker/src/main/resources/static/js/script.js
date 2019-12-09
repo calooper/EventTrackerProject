@@ -76,6 +76,11 @@ function displayFast(fast) {
 	console.log("in display fast");
 	
 
+	let h2 = document.querySelector('h3');
+	let totalCalories = 0;
+
+	
+	
 
 	fast.forEach(function(e) {
 
@@ -85,9 +90,8 @@ function displayFast(fast) {
 		let tableDataDelete = document.createElement('td');
 		let button = document.createElement('td');
 		let edit = document.createElement('td');
-// let edit2 = document.createElement('td');
 		
-		
+	
 		
 		 button.innerHTML = `
 				
@@ -111,19 +115,10 @@ function displayFast(fast) {
 			
 
 		});
-		 
-//			
-// edit2.updateForm.FormaddEventListener('click', function(event) {
-//				
-// event.preventDefault();
-// var fastIdDelete = e.id;
-// editFunction(e);
-//				
-//
-// });
-		 
-
+		  
+		
 	
+		totalCalories += e.calories;
 		let tableDataID = document.createElement('td');
 		let tableDataDate = document.createElement('td');
 		let tableDataStart = document.createElement('td');
@@ -137,7 +132,9 @@ function displayFast(fast) {
 		tableDataStart.textContent = e.startFast;
 		tableDataEnd.textContent = e.endFast;
 		tableDataCalories.textContent = e.calories;
+		h2.textContent = Math.round(totalCalories /  e.length);
 
+	
 	
 
 		tableBody.appendChild(tableRow);
@@ -149,9 +146,12 @@ function displayFast(fast) {
 		tableRow.appendChild(tableDataDelete);
 		tableRow.appendChild(button);
 		tableRow.appendChild(edit);
+//		tableRow.appendChild(h2);
+	
 		
 	})
 	
+
 }
 
 
