@@ -19,7 +19,7 @@ function addNewFast() {
 	xhr.onreadystatechange = function() {
 
 		if (xhr.readyState === 4) {
-			if (xhr.status == 200 || xhr.status == 201) { // Ok or Created
+			if (xhr.status == 200 || xhr.status == 201) {
 				var fastObject = JSON.parse(xhr.responseText);
 				console.log(fastObject);
 				displayFast(fastObject);
@@ -33,7 +33,6 @@ function addNewFast() {
 	var form = document.addFastForm;
 	var newFastObject = {
 		date : form.date.value,
-		// description : "a desc",
 		startFast : 12450000,
 		endFast : 000000,
 		calories : 3000
@@ -79,8 +78,18 @@ function displayFast(fast) {
 		let tableBody = document.querySelector('tbody');
 
 		let tableRow = document.createElement('tr');
+		
+		
+		tableRow.addEventListener('click', function(event) {
+			
+			event.preventDefault();
+			var fastIdDelete = e.id;
+			editFunction(e);
+			
 
-		let deleteButton = document.getElementById('delete');
+		});
+
+//		let deleteButton = document.getElementById('delete');
 
 		let tableDataID = document.createElement('td');
 		let tableDataDate = document.createElement('td');
@@ -96,23 +105,24 @@ function displayFast(fast) {
 		tableDataStart.textContent = e.startFast;
 		tableDataEnd.textContent = e.endFast;
 		tableDataCalories.textContent = e.calories;
-		
-		
+
 	
-
-//		document.document.querySelector('deleteIt')addEventListener('click', function(event) {
-		tableDataDelete.innerHTML = `
-		
-			<button id="delete"  name="deleteIt" class="btn btn-danger value="fastId" value="fastId">Delete</button>
-
-		`;
-//		});
-			
-		
-		tableDataEdit.innerHTML = `
-			<button id="edit" class="btn btn-info" value="fastId">Edit</button>
-		
-		`;
+		//
+		// tableDataDelete.innerHTML = `
+		//		
+		// <button id="delete" name="deleteIt" class="btn btn-danger
+		// value="fastId"
+		// value="fastId">Delete</button>
+		//
+		// `;
+		//		
+		//
+		//			
+		//		
+		// tableDataEdit.innerHTML = `
+		// <button id="edit" class="btn btn-info" value="fastId">Edit</button>
+		//		
+		// `;
 
 		tableBody.appendChild(tableRow);
 		tableRow.appendChild(tableDataID);
@@ -123,39 +133,62 @@ function displayFast(fast) {
 		tableRow.appendChild(tableDataDelete);
 		tableRow.appendChild(tableDataEdit);
 
-	});
+		
+	
+	})
+	
 
 }
 
 
+
+function myFunction() {
+	  var fastId = prompt("Please enter the fast ID");
+	  
+	  if (fastId != null ) {
+		  deleteRow(fastId)
+	  }
+	  else window.prompt("Please enter a valid ID")
+	  
+	}
+
+function editFunction(e) {
+	
+//	  var fastId = prompt("Fast Number: " + e.id);
+	  var Data = prompt("This\nis\nmultiline");
+	  
+	  
+	  
+	  
+	  
+//	  if (fastId != null ) {
+//		  deleteRow(fastId)
+//	  }
+//	  else window.prompt("Please enter a valid ID")
+	  
+	}
+
+
+
+function deleteRow(fastId) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('DELETE', 'http://localhost:8089/api/fasts/' + fastId, true);
+	xhr.setRequestHeader("Content-type", "application/json"); 
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if (xhr.status == 200 || xhr.status == 201) {
+				
+				var data = JSON.parse(xhr.responseText);
+			} else {
+				console.log("DELETE request failed.");
+				console.error(xhr.status + ': ' + xhr.responseText);
+			}
+		}
+	};
+	
 	
 
 
-
-
- function deleteRow(fastId) {
-	 var xhr = new XMLHttpRequest();
-	 xhr.open('POST', 'http://localhost:8089/api/fasts', true);
-	 xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON
-
-
-
-	 xhr.onreadystatechange = function() {
-		 if (xhr.readyState === 4) {
-			 if (xhr.status == 200 || xhr.status == 201) { s
-				 var data = JSON.parse(xhr.responseText);
-			 console.log(data);
-			 } else {
-				 console.log("POST request failed.");
-				 console.error(xhr.status + ': ' + xhr.responseText);
-			 }
-		 }
-	 };
-
-	 var userObjectJson = JSON.stringify(userObject); 
-
-
-	 xhr.send(userObjectJson);
- }
- 
- 
+	xhr.send(null);
+}

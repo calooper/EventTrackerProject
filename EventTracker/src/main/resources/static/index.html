@@ -61,23 +61,22 @@ body {
 			<tr>
 				<form name="addFastForm">
 					<td></td>
-					<td><input type="date" name="date"></td>
-					<td><input type="time" name="startFast"></td>
-					<td><input type="time" name="endFast"></td>
-					<td><input type="number" name="calories"></td>
+					<td><input type="date" name="date" required></td>
+					<td><input type="time" name="startFast" required></td>
+					<td><input type="time" name="endFast" required></td>
+					<td><input type="number" name="calories" required></td>
 					<td></td>
-					<td><button name="create" class="btn btn-success">Add
-							Fast</button></td>
-				<td>
+					<td><button name="create" class="btn btn-success">Add Fast</button></td>
+				</form>
+				
+				<form name="deleteFastForm">
+				
+					<td><button class="btn btn-danger" type= "number" onclick="myFunction()">Delete</button></td>
+				</form>
 				
 				
-				</td>
-
-		
-
-
-
-
+				
+				
 			</tr>
 			<tr>
 			<tr>
