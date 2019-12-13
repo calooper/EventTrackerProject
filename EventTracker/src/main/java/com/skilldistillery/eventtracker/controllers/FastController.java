@@ -1,13 +1,13 @@
 package com.skilldistillery.eventtracker.controllers;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +22,11 @@ import com.skilldistillery.eventtracker.service.FastService;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin({ "*", "http://localhost:4209" })
 public class FastController {
 
+	
+	//port 8090
 	@Autowired
 	private FastService fRepo;
 

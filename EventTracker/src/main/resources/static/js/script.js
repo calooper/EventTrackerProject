@@ -35,7 +35,7 @@ function addNewFast() {
 		date : form.date.value,
 		startFast : 12450000,
 		endFast : 000000,
-		calories : 4000
+		calories : form.calories.value
 	};
 
 	var newFastJsonString = JSON.stringify(newFastObject);
