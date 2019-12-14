@@ -1,0 +1,72 @@
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <form id="search" class="form-inline">
+      <input type="date" style="margin: 5px" class="textAdd" class="form-control" name="fast" [(ngModel)]="newFast.date" />
+      <input type="time" style="margin: 5px" class="textAdd" class="form-control" name="start" [(ngModel)]="newFast.start" />
+      <input type="time" style="margin: 5px" class="textAdd" class="form-control" name="end" [(ngModel)]="newFast.end" />
+      <input type="submit" class="btn btn-primary" style="margin: 5px;" value="Add Fast" (click)="addFast(newFast)" />
+    </form>
+
+    <span id="count">
+      <!-- <h1 class="badge badge-primary " style="margin-left: 860px;"> {{getNumFasts()}}</h1> -->
+    </span>
+
+  </nav>
+  <div *ngIf="!selected"></div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Length</th>
+        <th></th>
+        <th></th>
+        <th></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fast of fasts">
+        <td> {{fast.date}}</td>
+        <td> {{fast.start}} </td>
+        <td> {{fast.end}} </td>
+        <td> {{fast.length}} </td>
+        <td></td>
+
+        <td><button class="btn btn-primary" (click)="deleteTodo(fast.id)"><img id="picDelete"
+              src="https://i.imgur.com/gNRL8La.png" alt="" srcset=""></button> </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <div *ngIf="selected && ! editSelected" button>
+    <ul>
+      <li><strong>ID:</strong> {{selected.id}}</li>
+      <li><strong>Task:</strong> {{selected.task}}</li>
+      <li><strong>Description:</strong> {{selected.description}}</li>
+      <li><strong>Completed:</strong> {{selected.completed}}</li>
+      <li></li>
+      <button class="btn btn-success" (click)="displayTable()">Close</button>
+      <button type="submit" style="margin: 5px;" class="btn btn-info" (click)="setEditTodo()"
+        (click)="displayEditTodo()" value="Add Item">Edit</button>
+    </ul>
+  </div>
+
+  <div *ngIf="editSelected" button>
+    <form>
+      <h3>Edit</h3>
+      <input type="text" style="margin: 5px" class="form-control" name="task" placeholder="Edit Task"
+        [(ngModel)]="editTodo.task" />
+      <input type="text" class="form-control" name="description" placeholder="Description"
+        [(ngModel)]="editTodo.description" />
+      <label><input type="checkbox" class="form-control" style="margin: 5px;" name="complete"
+          placeholder="Complete Status" [(ngModel)]="editTodo.completed" /></label>
+      <input type="submit" name='todo' style="margin: 5px;" class="btn btn-success" (click)="displayTable()"
+        (click)="editSelected = false" (click)="updateTodo(editTodo)" value="Save" />
+      <input type="reset" class="btn btn-info" (click)="editTodo = null" (click)="displayTable()"
+        (click)="editSelected = false" value="Cancel" />
+    </form>
+  </div>-->
+</body>

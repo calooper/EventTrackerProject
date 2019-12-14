@@ -1,8 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+
+
+  { path: '', pathMatch: 'full', redirectTo: '/fasts' },
+  { path: 'navbar', component: NavBarComponent },
+  { path: 'fasts', component: HomeComponent },
+  { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

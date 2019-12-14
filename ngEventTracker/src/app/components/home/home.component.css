@@ -1,0 +1,115 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+
+}
+
+th, td {
+  text-align: left;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+
+}
+
+tr:hover {background-color:#f5f5f5; color: #4caf50;}
+
+
+tr:active {background-color: lightgrey; color: #4caf50}
+
+th {
+  background-color: #007bfe;
+  color: white;
+}
+
+h1, body, table, th, tr {
+  font-family: sans-serif;
+
+}
+h1 {
+  color: #4caf50;
+}
+
+.addTask {
+  text-align: left;
+  padding: 5px;
+
+
+}
+.count {
+  border-block-color:#4CAF50;
+  border-width: 2px;
+  border-style: solid;
+  padding: 5px;
+}
+/*
+h3 {
+  background-color: #4caf50;
+  text-align: left;
+  padding: 15px;
+  color: white;
+  border-bottom: 1px solid #4caf50;
+  font-size: medium;
+  font: bold;
+  font-family: sans-serif;
+
+} */
+
+#delete {
+  background-color: #007bfe; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.badge {
+
+  /* height: 50px;
+  width: 50px; */
+  padding: 10px;
+  border-width: 2px;
+   border-style: solid;
+
+
+}
+
+#picDelete{
+  height: 15px;
+}
+ .yellow {
+   color: yellow;
+   padding: 5px;
+   font-size: 40px;
+   text-align: center;
+ }
+
+ .red {
+   color: red;
+  font-size: 40px;
+  padding: 3px;
+  text-align: center;
+
+ }
+
+ .green {
+   color: #4CAF50;
+   /* border-width: 2px; */
+   /* border-style: solid; */
+   padding: 5px;
+   font-size: 40px;
+
+ }
+
+ .strikeOut {
+
+  text-decoration-line: line-through;
+  color: lightgrey;
+
+ }
+
+

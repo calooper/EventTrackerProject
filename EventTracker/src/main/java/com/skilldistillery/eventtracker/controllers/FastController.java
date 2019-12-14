@@ -30,8 +30,17 @@ public class FastController {
 	@Autowired
 	private FastService fRepo;
 
-	@RequestMapping(path = "fasts", method = RequestMethod.GET)
+	@RequestMapping(path = "/fasts", method = RequestMethod.GET)
 	public List<Fast> listAllFasts() {
+		
+		System.out.println("in fast list all controller");
+		
+//		List<Fast> list = fRepo.listAllFasts();
+//		System.out.println("inside list controller for each");
+//		for (Fast fast : list) {
+//			System.out.println(fast.getId() + " "  + fast.getStartFast());
+//			System.out.println();
+//		}
 
 		return fRepo.listAllFasts();
 	}
@@ -48,6 +57,10 @@ public class FastController {
 
 	@PostMapping(path = "/fasts")
 	public Fast addFast(@RequestBody Fast fast, HttpServletRequest req, HttpServletResponse resp) {
+		
+		System.out.println("in post add fast controller " + fast.getId() +  fast.getDate());
+		
+		
 		try {
 			fRepo.addFast(fast);
 			resp.setStatus(201);

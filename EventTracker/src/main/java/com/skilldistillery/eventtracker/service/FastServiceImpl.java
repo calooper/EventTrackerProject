@@ -19,6 +19,12 @@ public class FastServiceImpl implements FastService {
 	@Override
 	public List<Fast> listAllFasts() {
 		// TODO Auto-generated method stub
+		
+		List<Fast> list = fRepo.findAll();
+		System.out.println("inside list fast service impl");
+		for (Fast fast : list) {
+			System.out.println(fast.getId() + " "  + fast.getStartFast());
+		}
 		return fRepo.findAll();
 	}
 
