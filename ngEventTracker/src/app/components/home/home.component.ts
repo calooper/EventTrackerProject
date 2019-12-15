@@ -13,6 +13,11 @@ import { NgModel } from '@angular/forms';
 export class HomeComponent implements OnInit {
 
 
+
+  // ctors
+  constructor(private fastSVC: FastService, private router: Router, private route: ActivatedRoute) { }
+
+
   // fields
   selected = null;
   editSelected = false;
@@ -26,6 +31,14 @@ export class HomeComponent implements OnInit {
   urlId: number;
 
 
+  monthIndex = null;
+  // monthString = null;
+  month = null;
+  arr = null;
+
+
+
+
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -34,11 +47,19 @@ export class HomeComponent implements OnInit {
     })
   };
 
+  // getTheMonth(): string {
+  //   this.arr = this.fast.date.split('-');
 
+  //   this.month = ['January', 'February', 'March', 'April', 'May', 'June',
+  //     'July', 'August', 'September', 'October', 'November', 'December'];
 
-  // ctors
-  constructor(private fastSVC: FastService, private router: Router, private route: ActivatedRoute) { }
+  //   this.monthIndex = parseInt(this.arr[1], 10) - 1;
 
+  //   console.log(this.monthIndex);
+  //   console.log(this.month[this.monthIndex]);
+
+  //   return 'january';
+  // }
 
   // // methods
   ngOnInit() {
@@ -58,17 +79,18 @@ export class HomeComponent implements OnInit {
 
     // }
     // else {
+    // this.getTheMonth();
     this.reload();
     // }
 
   }
 
-  getNumFasts = function() {
+  getNumFasts = function () {
 
     return this.fasts.length;
   };
 
-  displayTodo(todo) {
+  displayFast(todo) {
 
     this.selected = true;
   }
@@ -79,7 +101,7 @@ export class HomeComponent implements OnInit {
     this.selected = false;
   }
 
-  displayEditTodo() {
+  displayEditFast() {
 
     this.editSelected = true;
   }
@@ -87,7 +109,7 @@ export class HomeComponent implements OnInit {
   addFast(newFast: NgModel) {
     console.log('in add fast ID ' + this.newFast.id);
     console.log('in add fast DATE ' + this.newFast.date);
-    console.log('in add fast START ' + this.newFast.start);
+    console.log('in add fast LENGTH ' + this.newFast.length);
 
     this.fastSVC.create(this.newFast).subscribe(
       data => {
@@ -102,13 +124,13 @@ export class HomeComponent implements OnInit {
   }
 
 
-  setEditTodo() {
+  setEditFast() {
 
     this.editFast = Object.assign({}, this.selected);
 
 
   }
-  updateTodo(fast: Fast) {
+  updateFast(fast: Fast) {
 
     console.log('in update comp ' + fast.id + '  ' + fast.date);
 
@@ -124,7 +146,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  deleteTodo(id: number) {
+  deleteFast(id: number) {
     console.log(id);
     this.fastSVC.delete(id).subscribe(
       newTodo => {
@@ -140,9 +162,9 @@ export class HomeComponent implements OnInit {
     this.fastSVC.index().subscribe(
       data => {
         this.fasts = data;
-        console.log("inside of reload" + data);
+        console.log('inside of reload' + data);
         this.fasts.forEach(e => {
-          console.log(e.date + "   " + e.start);
+          console.log(e.date + '   ' + e.start);
 
         });
       },
@@ -151,6 +173,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
 
 }
 

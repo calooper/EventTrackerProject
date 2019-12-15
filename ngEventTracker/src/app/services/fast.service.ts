@@ -42,7 +42,7 @@ export class FastService {
 
     console.log('in create service ID ' + newFast.id);
     console.log('in create service DATE ' + newFast.date);
-    console.log('in create service START ' + newFast.start);
+    console.log('in create service LEGNTH ' + newFast.length);
     // const httpOptions = {
     //   header: {
     //     'Content-type': 'applicaiton/json'

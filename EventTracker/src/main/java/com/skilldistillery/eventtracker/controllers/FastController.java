@@ -22,7 +22,7 @@ import com.skilldistillery.eventtracker.service.FastService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({ "*", "http://localhost:4209" })
+@CrossOrigin({ "*", "http://localhost:4209/" })
 public class FastController {
 
 	
@@ -55,10 +55,10 @@ public class FastController {
 		return fast;
 	}
 
-	@PostMapping(path = "/fasts")
+	@PostMapping(path = "fasts")
 	public Fast addFast(@RequestBody Fast fast, HttpServletRequest req, HttpServletResponse resp) {
 		
-		System.out.println("in post add fast controller " + fast.getId() +  fast.getDate());
+		System.out.println("in post add fast controller " + fast.getId() +  fast.getDate() + " " +  fast.getLength());
 		
 		
 		try {

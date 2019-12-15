@@ -27,6 +27,8 @@ export class Fast {
     console.log("inside constructor " + this.date + "   " + this.start);
 
 
+
+
   }
 
 
