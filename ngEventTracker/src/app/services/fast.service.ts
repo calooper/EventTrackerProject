@@ -17,6 +17,7 @@ export class FastService {
   fasts = [];
 
 
+
   // ctors
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
@@ -36,6 +37,7 @@ export class FastService {
   handleError(error: any) {
     console.error('Something Broke');
     return throwError(error.json().error || 'Server Error');
+    // this.newFast.date.getDay
   }
 
   create(newFast: Fast) {

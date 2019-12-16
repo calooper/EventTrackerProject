@@ -7,7 +7,7 @@ start-time, end-time, duration, calories, etc.
 
 ### Technologies
 
-This is a REST API with Spring Boot, JPA, Hibernate, and MySQL.
+This is a REST API with Spring Boot, JPA, Hibernate, MySQL, and Angular.
 
 All Technologies Used:
 * Java
@@ -21,6 +21,7 @@ All Technologies Used:
 * MAMP
 * STS
 * JavaScript
+* Angular
 
 
 REST Endpoints:
@@ -56,10 +57,14 @@ Working with the JavaScript, the edit feature was a a bit of a challenge. The
 biggest trouble came from trying to debug the value of variables being passed
 around.
 
+Angular seemed much more familiar than JavaScript. However, having the correct
+imports with their correct associated paths gave me some trouble, but I was
+able to figure that portion out thanks to stack overflow.
+
 ### Stretch Goals
 I did not use any custom queries for this project, but as we
 move forward to next week's homework and keep building on this project, there
 might be a need to implement any custom queries.
 
 I would like to make this a fully responsive app that I could use to track
-my intermittent fasting from my phone.
+my intermittent fasting from my phone. 

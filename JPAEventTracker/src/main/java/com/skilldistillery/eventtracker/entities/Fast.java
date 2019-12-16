@@ -27,10 +27,10 @@ public class Fast {
 	private double length;
 
 	@Column(name = "start_fast")
-	private Time startFast;
+	private String startFast;
 
 	@Column(name = "end_fast")
-	private Time endFast;
+	private String endFast;
 
 	private int calories;
 
@@ -42,8 +42,8 @@ public class Fast {
 		super();
 	}
 
-	public Fast(int id, LocalDate date, String description, double length, Time startFast,
-			Time endFast, int calories, String remarks) {
+	public Fast(int id, LocalDate date, String description, double length, String startFast,
+			String endFast, int calories, String remarks) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -89,19 +89,19 @@ public class Fast {
 		this.length = length;
 	}
 
-	public Time getStartFast() {
+	public String getStartFast() {
 		return startFast;
 	}
 
-	public void setStartFast(Time startFast) {
+	public void setStartFast(String startFast) {
 		this.startFast = startFast;
 	}
 
-	public Time getEndFast() {
+	public String getEndFast() {
 		return endFast;
 	}
 
-	public void setEndFast(Time endFast) {
+	public void setEndFast(String endFast) {
 		this.endFast = endFast;
 	}
 

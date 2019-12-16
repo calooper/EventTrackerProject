@@ -12,6 +12,10 @@ import { DatePipe } from '@angular/common';
 import { FastService } from './services/fast.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http/';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { ChartsModule } from 'ng2-charts';
+// import { MatSlider } from '@angular/material/slider';
+// import CanvasJS from 'canvasjs';
 
 
 
@@ -20,14 +24,20 @@ import { HttpClientModule } from '@angular/common/http/';
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
-    NavBarComponent
+    NavBarComponent,
+    BarChartComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule,
+    // MatSlider
+    // CanvasJS
+
     // HttpHeaders,
     // HttpHeaderResponse
   ],

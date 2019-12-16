@@ -4,21 +4,40 @@ import { HttpHeaders } from '@angular/common/http/';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FastService } from 'src/app/services/fast.service';
 import { NgModel } from '@angular/forms';
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
+import { DatePipe } from '@angular/common';
+// import { MatSlider } from '@angular/material/slider';
+// import CanvasJS from 'canvasjs';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
+
 })
 export class HomeComponent implements OnInit {
 
 
 
+
   // ctors
-  constructor(private fastSVC: FastService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private fastSVC: FastService, private router: Router, private route: ActivatedRoute, private datePipe: DatePipe) {
+
+  }
 
 
-  // fields
+  // F I E L D S
+  barChartOptions: ChartOptions = { responsive: true };
+  datePipeString: string;
+  barChartLabels: Label[] = [];
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins = [];
+  barChartData: ChartDataSets[] = [];
+
+
   selected = null;
   editSelected = false;
   newFast: Fast = new Fast();
@@ -29,6 +48,43 @@ export class HomeComponent implements OnInit {
   showComplete = false;
   currentRoute: any;
   urlId: number;
+  averageDuration = 0;
+  sumDuration = 0;
+
+
+
+
+  public chartColors: Array<any> = [
+    {
+
+
+      backgroundColor: [
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(54, 162, 235, 0.7)'
+      ],
+      hoverBackgroundColor: 'rgba(54, 162, 235, .2)',
+      borderColor: 'rgba(54, 162, 235, 0.7)',
+      hoverBorderColor: 'rgba(54, 162, 235, .2)',
+      borderWidth: 0,
+    }
+  ];
+
+
+  show_value(x): number {
+    // document.getElementById("slider_value").innerHTML = x;
+
+    return document.getElementById('slider_value').innerHTML = x;
+  }
+
+
+
+
+
+
 
 
   monthIndex = null;
@@ -64,24 +120,9 @@ export class HomeComponent implements OnInit {
   // // methods
   ngOnInit() {
     console.log('In init');
-    // if (!this.selected && this.route.snapshot.paramMap.get('id')) {
-    //   if (!this.selected && this.route.snapshot.paramMap.get('id')) {
-    //     this.fastSVC.show(this.route.snapshot.paramMap.get('id')).subscribe(
-    //       data => {
-    //         this.selected = data;
-    //         if (this.selected === null) {
-    //           this.router.navigateByUrl('todo' + this.route.snapshot.paramMap.get('id') + 'NotFound');
-    //         }
-    //       },
-    //       err => console.error('failed to find a single todo')
-    //     );
-    //   }
 
-    // }
-    // else {
-    // this.getTheMonth();
     this.reload();
-    // }
+    this.loadGraph();
 
   }
 
@@ -158,23 +199,69 @@ export class HomeComponent implements OnInit {
 
   }
 
+
   reload() {
     this.fastSVC.index().subscribe(
       data => {
         this.fasts = data;
-        console.log('inside of reload' + data);
-        this.fasts.forEach(e => {
-          console.log(e.date + '   ' + e.start);
-
-        });
       },
       (err) => {
         console.log(err);
       }
     );
+
+
   }
 
+  loadGraph() {
+    this.averageDuration = 0;
+    this.sumDuration = 0;
+    console.log("array length " + this.fasts.length);
+    this.fastSVC.index().subscribe(
+      data => {
 
+
+          for (let i = this.fasts.length -5; i < this.fasts.length; i++) {
+
+            this.sumDuration = this.sumDuration + this.fasts[i].length;
+            console.log(" workout length" + this.fasts[i].length);
+            console.log("sum duration " + this.sumDuration);
+
+
+
+            this.barChartLabels = [
+              // this.datePipe.transform(this.fasts[this.fasts.length -6].date, 'EEEE'),
+              this.datePipe.transform(this.fasts[this.fasts.length - 5].date, 'EEEE'),
+              this.datePipe.transform(this.fasts[this.fasts.length - 4].date, 'EEEE'),
+              this.datePipe.transform(this.fasts[this.fasts.length - 3].date, 'EEEE'),
+              this.datePipe.transform(this.fasts[this.fasts.length - 2].date, 'EEEE'),
+              this.datePipe.transform(this.fasts[this.fasts.length - 1].date, 'EEEE')],
+              // this.datePipe.transform(this.fasts[6].date, 'EEEE')],
+              this.barChartData = [
+                {
+                  data: [
+                    // this.fasts[this.fasts.length-1].length,
+                    this.fasts[this.fasts.length - 5].length,
+                    this.fasts[this.fasts.length - 4].length,
+                    this.fasts[this.fasts.length - 3].length,
+                    this.fasts[this.fasts.length - 2].length,
+                    this.fasts[this.fasts.length - 1].length],
+                  // this.fasts[6].length],
+                  label: '7 Day Summary'
+                }
+              ];
+          }
+
+          data.forEach(e => {
+
+
+        });
+        this.averageDuration = (this.sumDuration / 5) / 60;
+        this.reload();
+        this.selected = data;
+        this.fast = null;
+      },
+      err => console.log('Update got an error: ' + err)
+    );
+  }
 }
-
-

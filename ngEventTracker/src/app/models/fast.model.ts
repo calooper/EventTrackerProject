@@ -10,6 +10,7 @@ export class Fast {
   end: Time;
   calories: number;
   length: number;
+  this: any;
 
 
 

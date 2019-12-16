@@ -58,7 +58,7 @@ public class FastController {
 	@PostMapping(path = "fasts")
 	public Fast addFast(@RequestBody Fast fast, HttpServletRequest req, HttpServletResponse resp) {
 		
-		System.out.println("in post add fast controller " + fast.getId() +  fast.getDate() + " " +  fast.getLength());
+		System.out.println("in post add fast controller " + fast.getId() +  fast.getStartFast() + " " +  fast.getEndFast());
 		
 		
 		try {
